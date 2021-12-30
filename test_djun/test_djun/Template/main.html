@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul style="width: 50%; position: absolute; left: 0" >
+    {% for row_region in regions %}
+    <li>{{row_region}}</li>
+    {% endfor %}
+</ul>
+<ul style="width: 50%; position: absolute; right: 0">
+    {% for row_categories in categories %}
+    <li>{{row_categories}}</li>
+    {% endfor %}
+</ul>
+
+<div >
+    <form method="post" style="display: inline">
+        <select name="column">
+        <option>Название</option>
+        <option>Количество</option>
+        <option>Расстояние</option>
+        </select>
+
+        <select name="method">
+        <option>равно</option>
+        <option>содержит</option>
+        <option>больше</option>
+        <option>меньше</option>
+        </select>
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Найти" />
+        </form>
+</div>
+
+<div> {{message}}</div>
+
+<table style="border-collapse: collapse; width: 100%; text-align: center">
+    <tr style="font-weight: bold">
+    <td style="border: 1px solid black; width: 25%">Дата</td>
+    <td style="border: 1px solid black; width: 25%">Название</td>
+    <td style="border: 1px solid black; width: 25%">Колличество</td>
+    <td style="border: 1px solid black; width: 25%">Расстояние</td>
+    </tr>
+
+    {% for row in db %}
+    <tr >
+        {% for elem in row %}
+        <td style="border: 1px solid black">{{elem}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
